@@ -11,3 +11,22 @@ Docker Desktop for Mac
 
 Shell into pod  
 `kubectl exec --stdin --tty PODNAME -- /bin/bash`
+
+Blank ubuntu pod
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu
+  labels:
+    app: ubuntu
+spec:
+  containers:
+  - image: ubuntu
+    command:
+      - "sleep"
+      - "604800"
+    imagePullPolicy: IfNotPresent
+    name: ubuntu
+  restartPolicy: Always
+  ```
