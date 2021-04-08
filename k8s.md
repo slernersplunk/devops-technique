@@ -25,6 +25,33 @@ Validate it
 Force apply a configuration (to overcome clustertype/nodeport issues  
 `kubectl apply -f [.yaml file] --force`
 
-Install ping/curl on minimal container
-`apt-get install curl`  
-`apt-get install iputils-ping`
+See env variables in pod  
+`kubectl exec PODNAME -- printenv`
+
+View config of resource  
+`kubectl get RESOURCETYPE RESOURCENAME --output yaml` i.e.  
+kubectl get pod PODNAME--output yaml | more
+
+Patch resource  
+`kubectl patch RESOURCETYPE DEPLOYMENTNAME --patch "$(cat UPDATEDFILE.yaml)"`  
+i.e. kubectl patch deployment DEPLOYMENTNAME --patch "$(cat patch-file.yaml)"
+
+Install ping/curl on minimal container  
+`apt-get -y update`  
+`apt install -y curl`  
+`apt install -y iputils-ping`  
+
+Minimal container deploy.yaml for testing:
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu
+spec:
+  containers:
+  - name: ubuntu
+    image: ubuntu:latest
+    # Just spin & wait forever
+    command: [ "/bin/bash", "-c", "--" ]
+    args: [ "while true; do sleep 30; done;" ]
+```

@@ -1,4 +1,6 @@
-#!/usr/local/bin/bash
+mkdir -p ~/.vim/bundle
+git clone https://github.com/VundleVim/Vundle.vim.git Vundle.vim
+cp -rf Vundle.vim ~/.vim/bundle
 
 cp -rf ./.vimrc ~
 
@@ -8,4 +10,4 @@ export CLICOLOR=1
 export TERM=xterm-256color" >> ~/.bash_profile
 source ~/.bash_profile
 
-vim +PlugInstall +qall
+vim +PluginInstall +qall
